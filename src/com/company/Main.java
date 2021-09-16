@@ -3,7 +3,7 @@ package com.company;
 import java.io.*;
 
 public class Main {
-    static StringBuilder log;
+    static StringBuilder LOG;
     // создать директорию
     static void makeDir(String newdir) {
         File dir = new File(newdir);
@@ -11,26 +11,26 @@ public class Main {
         if (!dir.exists()) {
             // создание
             if (dir.mkdir())
-                log.append("Создана директория ").append(newdir).append("\n");
+                LOG.append("Создана директория ").append(newdir).append("\n");
             else
-                log.append("Не удалось создать директорию ").append(newdir).append("\n");
+                LOG.append("Не удалось создать директорию ").append(newdir).append("\n");
         } else
-            log.append("Директория уже существует ").append(newdir).append("\n");
+            LOG.append("Директория уже существует ").append(newdir).append("\n");
     }
     // создать файл
     static void createFile(String pathName) {
         File newFile = new File(pathName);
         // файл уже существует
-        if (newFile.exists()) log.append("Файл уже существует ").append(pathName).append("\n");
+        if (newFile.exists()) LOG.append("Файл уже существует ").append(pathName).append("\n");
         else {
             try {
                 // создание
                 if (newFile.createNewFile())
-                    log.append("Создан файл ").append(pathName).append("\n");
+                    LOG.append("Создан файл ").append(pathName).append("\n");
                 else
-                    log.append("Не удалось создать файл ").append(pathName).append("\n");
+                    LOG.append("Не удалось создать файл ").append(pathName).append("\n");
             } catch (IOException exp) {
-                log.append("Не удалось создать файл ").append(pathName).append("\n").append(exp.getMessage()).append("\n");
+                LOG.append("Не удалось создать файл ").append(pathName).append("\n").append(exp.getMessage()).append("\n");
             }
         }
     }
@@ -41,7 +41,7 @@ public class Main {
                          "res//drawables", "res//vectors", "res//icons"};
         String[] files = {"src//main//Main.java", "src//main//Util.java", "temp//temp.txt"};
         String wrkDir;
-        log = new StringBuilder();
+        LOG = new StringBuilder();
         // создание директорий
         for(int i = 0; i < dirs.length; i++){
             makeDir(ROOT_DIR + dirs[i]);
@@ -58,7 +58,7 @@ public class Main {
             // потоковая запись в файл результата
             try(Writer writer = new FileWriter(wrkDir+"//temp.txt")){
                 // запись
-                writer.write(log.toString());
+                writer.write(LOG.toString());
             } catch(IOException exp) {
                 System.out.println("Не удалось записать в файл " + wrkDir + "temp.txt" + "\n" + exp.getMessage());
             }
